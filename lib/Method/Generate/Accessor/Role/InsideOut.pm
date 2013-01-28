@@ -1,17 +1,18 @@
-package MooX::InsideOut::Generate::Accessor;
-use strictures 1;
-use base qw(Method::Generate::Accessor);
+package Method::Generate::Accessor::Role::InsideOut;
+use Moo::Role;
 
 use Hash::Util::FieldHash::Compat qw(fieldhash);
 use B qw(perlstring);
 
 fieldhash our %FIELDS;
 
-sub generate_method {
+around generate_method => sub {
+    my $orig = shift;
     my $self = shift;
+    # would like a better way to disable XS
     local $Method::Generate::Accessor::CAN_HAZ_XS = 0;
-    $self->SUPER::generate_method(@_);
-}
+    $self->$orig(@_);
+};
 
 sub _generate_simple_has {
     my ($self, $me, $name) = @_;

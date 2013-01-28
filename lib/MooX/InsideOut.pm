@@ -2,7 +2,7 @@ package MooX::InsideOut;
 use strictures 1;
 
 use Moo ();
-use MooX::InsideOut::Generate::Accessor;
+use Moo::Role ();
 
 sub import {
     my $class = shift;
@@ -11,7 +11,10 @@ sub import {
         die "MooX::InsideOut can only be used on Moo classes.";
     }
 
-    $Moo::MAKERS{$target}{accessor} = MooX::InsideOut::Generate::Accessor->new;
+    Moo::Role->apply_roles_to_object(
+      Moo->_accessor_maker_for($target),
+      'Method::Generate::Accessor::Role::InsideOut',
+    );
 
     # make sure we have our own constructor
     Moo->_constructor_maker_for($target);
