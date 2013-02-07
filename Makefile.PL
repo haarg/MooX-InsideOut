@@ -9,9 +9,9 @@ WriteMakefile(
   VERSION_FROM => 'lib/MooX/InsideOut.pm',
 
   PREREQ_PM => {
-    'Moo' => 0,
-    'Hash::Util::FieldHash::Compat' => 0,
-    'strictures' => 0,
+    'Moo' => 1.000007,
+    'Hash::Util::FieldHash::Compat' => 0.03,
+    'strictures' => 1,
   },
   'BUILD_REQUIRES' => {
     'Test::More' => 0.94,
