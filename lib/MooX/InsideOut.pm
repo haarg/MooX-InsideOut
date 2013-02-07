@@ -1,7 +1,7 @@
 package MooX::InsideOut;
 use strictures 1;
 
-our $VERSION = '0.001000';
+our $VERSION = '0.001001';
 $VERSION = eval $VERSION;
 
 use Moo ();
