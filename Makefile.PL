@@ -19,7 +19,7 @@ WriteMakefile(
 
   META_MERGE => {
     requires => {
-      perl => '5.8',
+      perl => 5.008001,
     },
     dynamic_config => 0,
     resources => {
