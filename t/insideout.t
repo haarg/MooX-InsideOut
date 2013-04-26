@@ -44,4 +44,27 @@ is $o->boggle, 1, 'non-moo methods still work';
 is $o->guff, 2, 'insideout attributes work for hashref class';
 is $o->{guff}, undef, 'insideout attributes not directly accessible for hashref class';
 
+{
+    package MooBase;
+    use Moo;
+
+    has dallas => (is => 'rw');
+}
+
+{
+    package MooInsideOutFromMoo;
+    use Moo;
+    use MooX::InsideOut;
+    extends 'MooBase';
+
+    has salad => ( is => 'rw' );
+}
+
+my $o2 = MooInsideOutFromMoo->new;
+$o2->dallas(1);
+$o2->salad(2);
+is $o2->dallas, 1, 'inherit from normal moo: base class accessors work';
+is $o2->salad, 2, 'inherit from normal moo: subclass attributes work';
+is $o2->{salad}, undef, 'inherit from normal moo: insideout attributes not directly accessible';
+
 done_testing;
