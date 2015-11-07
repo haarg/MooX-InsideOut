@@ -1,8 +1,7 @@
 package MooX::InsideOut::Role::GenerateAccessor;
-use Moo::Role;
-
 use Hash::Util::FieldHash::Compat qw(fieldhash);
-use B qw(perlstring);
+use Sub::Quote qw(quotify);
+use Moo::Role;
 
 fieldhash our %FIELDS;
 
@@ -14,32 +13,26 @@ around generate_method => sub {
     $self->$orig(@_);
 };
 
+sub _generate_simple_get {
+    my ($self, $me, $name) = @_;
+    my $name_str = quotify $name;
+    $self->{captures}{'$MooX_InsideOut_FIELDS'} = \\%FIELDS;
+    "\$MooX_InsideOut_FIELDS->{${me}}->{${name_str}}";
+}
+
 sub _generate_simple_has {
     my ($self, $me, $name) = @_;
-    my $name_str = perlstring $name;
-    $self->{captures}{'$FIELDS'} = \\%FIELDS;
-    "exists \$FIELDS->{${me}}->{${$name_str}}";
+    "exists " . $self->_generate_simple_get($me, $name);
 }
 
 sub _generate_simple_clear {
     my ($self, $me, $name) = @_;
-    my $name_str = perlstring $name;
-    $self->{captures}{'$FIELDS'} = \\%FIELDS;
-    "    delete \$FIELDS->{${me}}->{${name_str}}";
-}
-
-sub _generate_simple_get {
-    my ($self, $me, $name) = @_;
-    my $name_str = perlstring $name;
-    $self->{captures}{'$FIELDS'} = \\%FIELDS;
-    "\$FIELDS->{${me}}->{${name_str}}";
+    "delete " . $self->_generate_simple_get($me, $name);
 }
 
 sub _generate_core_set {
     my ($self, $me, $name, $spec, $value) = @_;
-    my $name_str = perlstring $name;
-    $self->{captures}{'$FIELDS'} = \\%FIELDS;
-    "\$FIELDS->{${me}}->{${name_str}} = ${value}";
+    $self->_generate_simple_get($me, $name) . " = ${value}";
 }
 
 sub _generate_xs {
