@@ -1,4 +1,4 @@
-package Method::Generate::Accessor::Role::InsideOut;
+package MooX::InsideOut::Role::GenerateAccessor;
 use Moo::Role;
 
 use Hash::Util::FieldHash::Compat qw(fieldhash);

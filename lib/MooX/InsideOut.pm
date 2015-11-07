@@ -16,7 +16,7 @@ sub import {
 
     Moo::Role->apply_roles_to_object(
       Moo->_accessor_maker_for($target),
-      'Method::Generate::Accessor::Role::InsideOut',
+      'MooX::InsideOut::Role::GenerateAccessor',
     );
 
     # make sure we have our own constructor
