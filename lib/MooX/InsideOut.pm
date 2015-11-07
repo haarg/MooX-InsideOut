@@ -1,26 +1,25 @@
 package MooX::InsideOut;
-use strictures 1;
+use strict;
+use warnings;
 
 our $VERSION = '0.001002';
 $VERSION = eval $VERSION;
 
 use Moo ();
 use Moo::Role ();
+use Carp ();
 
 sub import {
     my $class = shift;
     my $target = caller;
-    unless ($Moo::MAKERS{$target} && $Moo::MAKERS{$target}{is_class}) {
-        die "MooX::InsideOut can only be used on Moo classes.";
-    }
+
+    my $con = Moo->_constructor_maker_for($target)
+      or Carp::croak "MooX::InsideOut can only be used on Moo classes.";
 
     Moo::Role->apply_roles_to_object(
       Moo->_accessor_maker_for($target),
       'MooX::InsideOut::Role::GenerateAccessor',
     );
-
-    # make sure we have our own constructor
-    Moo->_constructor_maker_for($target);
 }
 
 1;
