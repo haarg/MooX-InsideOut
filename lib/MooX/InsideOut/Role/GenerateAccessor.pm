@@ -10,6 +10,7 @@ around generate_method => sub {
     my $self = shift;
     # would like a better way to disable XS
     local $Method::Generate::Accessor::CAN_HAZ_XS = 0;
+    #TODO: add Storable hooks
     $self->$orig(@_);
 };
 
