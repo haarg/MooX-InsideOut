@@ -11,7 +11,6 @@ WriteMakefile(
   PREREQ_PM => {
     'Moo' => 1.000007,
     'Hash::Util::FieldHash::Compat' => 0.03,
-    'strictures' => 1,
   },
   'BUILD_REQUIRES' => {
     'Test::More' => 0.94,
