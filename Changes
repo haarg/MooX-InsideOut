@@ -1,5 +1,6 @@
 Revision history for MooX-InsideOut
 
+0.001003 - 2016-10-15
   - dropped strictures prerequisite
   - various internal cleanups
   - internal role renamed
