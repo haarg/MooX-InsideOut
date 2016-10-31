@@ -16,8 +16,8 @@ my %META = (
     },
     runtime => {
       requires => {
-        'Moo' => 1.004_003,
-        'Sub::Quote' => 1.004_003,
+        'Moo'         => 2.002005,
+        'Sub::Quote'  => 2.002005,
         'Hash::Util::FieldHash::Compat' => 0.03,
       },
     },
