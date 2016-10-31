@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 our $VERSION = '0.001003';
-$VERSION = eval $VERSION;
+$VERSION =~ tr/_//d;
 
 use Moo ();
 use Moo::Role ();
