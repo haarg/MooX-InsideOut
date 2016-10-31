@@ -2,7 +2,7 @@ package MooX::InsideOut;
 use strict;
 use warnings;
 
-our $VERSION = '0.001003';
+our $VERSION = '0.001004';
 $VERSION =~ tr/_//d;
 
 use Moo ();
