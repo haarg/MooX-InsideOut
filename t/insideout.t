@@ -68,4 +68,20 @@ is $o2->dallas, 1, 'inherit from normal moo: base class accessors work';
 is $o2->sallad, 2, 'inherit from normal moo: subclass attributes work';
 is $o2->{sallad}, undef, 'inherit from normal moo: insideout attributes not directly accessible';
 
+eval {
+  package MooInsideOutWithClearer;
+  use Moo;
+  use MooX::InsideOut;
+
+  has gulp => ( is => 'rw', clearer => 'clear_gulp', predicate => 'has_gulp' );
+};
+is $@, '', 'no error for attribute with clearer and predicate';
+
+my $o3 = MooInsideOutWithClearer->new;
+ok !$o3->has_gulp, 'predicate false when not set';
+$o3->gulp(3);
+ok $o3->has_gulp, 'predicate true when set';
+$o3->clear_gulp;
+ok !$o3->has_gulp, 'predicate false after cleared';
+
 done_testing;
