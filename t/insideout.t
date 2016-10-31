@@ -3,11 +3,11 @@ use warnings;
 use Test::More;
 
 {
-    package MooInsideOut;
-    use Moo;
-    use MooX::InsideOut;
+  package MooInsideOut;
+  use Moo;
+  use MooX::InsideOut;
 
-    has dogs => (is => 'ro');
+  has dogs => (is => 'ro');
 }
 
 my $io = MooInsideOut->new(dogs => 1);
@@ -15,27 +15,27 @@ is $io->dogs, 1, 'insideout accessors work';
 is eval { $io->{dogs} }, undef, 'insideout attributes not directly accessible';
 
 {
-    package NonMooClass;
-    sub new { bless {}, shift }
+  package NonMooClass;
+  sub new { bless {}, shift }
 
-    sub boggle {
-        my $self = shift;
-        if (@_) {
-            $self->{boggle} = shift;
-        }
-        else {
-            $self->{boggle};
-        }
+  sub boggle {
+    my $self = shift;
+    if (@_) {
+      $self->{boggle} = shift;
     }
+    else {
+      $self->{boggle};
+    }
+  }
 }
 
 {
-    package MooInh;
-    use Moo;
-    use MooX::InsideOut;
-    extends 'NonMooClass';
+  package MooInh;
+  use Moo;
+  use MooX::InsideOut;
+  extends 'NonMooClass';
 
-    has guff => (is => 'rw');
+  has guff => (is => 'rw');
 }
 
 my $o = MooInh->new;
@@ -46,19 +46,19 @@ is $o->guff, 2, 'insideout attributes work for hashref class';
 is $o->{guff}, undef, 'insideout attributes not directly accessible for hashref class';
 
 {
-    package MooBase;
-    use Moo;
+  package MooBase;
+  use Moo;
 
-    has dallas => (is => 'rw');
+  has dallas => (is => 'rw');
 }
 
 {
-    package MooInsideOutFromMoo;
-    use Moo;
-    use MooX::InsideOut;
-    extends 'MooBase';
+  package MooInsideOutFromMoo;
+  use Moo;
+  use MooX::InsideOut;
+  extends 'MooBase';
 
-    has salad => ( is => 'rw' );
+  has salad => ( is => 'rw' );
 }
 
 my $o2 = MooInsideOutFromMoo->new;

@@ -10,16 +10,16 @@ use Moo::Role ();
 use Carp ();
 
 sub import {
-    my $class = shift;
-    my $target = caller;
+  my $class = shift;
+  my $target = caller;
 
-    my $con = Moo->_constructor_maker_for($target)
-      or Carp::croak "MooX::InsideOut can only be used on Moo classes.";
+  my $con = Moo->_constructor_maker_for($target)
+    or Carp::croak "MooX::InsideOut can only be used on Moo classes.";
 
-    Moo::Role->apply_roles_to_object(
-      Moo->_accessor_maker_for($target),
-      'MooX::InsideOut::Role::GenerateAccessor',
-    );
+  Moo::Role->apply_roles_to_object(
+    Moo->_accessor_maker_for($target),
+    'MooX::InsideOut::Role::GenerateAccessor',
+  );
 }
 
 1;
@@ -32,9 +32,9 @@ MooX::InsideOut - Inside out objects for Moo
 
 =head1 SYNOPSIS
 
-    package MyClass;
-    use Moo;
-    use MooX::InsideOut;
+  package MyClass;
+  use Moo;
+  use MooX::InsideOut;
 
 =head1 DESCRIPTION
 
