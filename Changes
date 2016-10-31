@@ -1,5 +1,6 @@
 Revision history for MooX-InsideOut
 
+0.001004 - 2016-10-31
   - bump prerequisite on Moo to fix clearer and predicate (RT#118453)
 
 0.001003 - 2016-10-15
