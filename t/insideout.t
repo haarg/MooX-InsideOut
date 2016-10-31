@@ -58,14 +58,14 @@ is $o->{guff}, undef, 'insideout attributes not directly accessible for hashref 
   use MooX::InsideOut;
   extends 'MooBase';
 
-  has salad => ( is => 'rw' );
+  has sallad => ( is => 'rw' );
 }
 
 my $o2 = MooInsideOutFromMoo->new;
 $o2->dallas(1);
-$o2->salad(2);
+$o2->sallad(2);
 is $o2->dallas, 1, 'inherit from normal moo: base class accessors work';
-is $o2->salad, 2, 'inherit from normal moo: subclass attributes work';
-is $o2->{salad}, undef, 'inherit from normal moo: insideout attributes not directly accessible';
+is $o2->sallad, 2, 'inherit from normal moo: subclass attributes work';
+is $o2->{sallad}, undef, 'inherit from normal moo: insideout attributes not directly accessible';
 
 done_testing;
