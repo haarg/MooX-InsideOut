@@ -16,10 +16,11 @@ sub import {
   my $con = Moo->_constructor_maker_for($target)
     or Carp::croak "MooX::InsideOut can only be used on Moo classes.";
 
-  Moo::Role->apply_roles_to_object(
-    Moo->_accessor_maker_for($target),
-    'MooX::InsideOut::Role::GenerateAccessor',
-  );
+  my $ag = Moo->_accessor_maker_for($target);
+  my $role = 'MooX::InsideOut::Role::GenerateAccessor';
+
+  Moo::Role->apply_roles_to_object($ag, $role)
+    unless $ag->does($role);
 }
 
 1;
